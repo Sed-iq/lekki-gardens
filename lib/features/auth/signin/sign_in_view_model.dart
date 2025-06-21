@@ -3,9 +3,13 @@ import '../../../utils/route_constants.dart';
 
 class SignInViewModel extends BaseViewModel {
   String getInitialRoute() {
-    bool hasUserLogin = getDataManager().getSaveLoginState(); // get login state
-    setUserLogin(hasUserLogin);
-    return RouteConstants.DASHBOARD; // returns dashboard but based on login state
+    bool hasUserLogin = getDataManager().getSaveLoginState();
+
+    if (hasUserLogin) {
+      return RouteConstants.DASHBOARD;
+    } else {
+      return RouteConstants.ONBOARDING;
+    }
   }
 
   bool isDarkMode() {
