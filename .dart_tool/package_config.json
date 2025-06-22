@@ -464,6 +464,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "mockito",
+      "rootUri": "file:///home/rider/.pub-cache/hosted/pub.dev/mockito-5.4.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
       "name": "money_formatter",
       "rootUri": "file:///home/rider/.pub-cache/hosted/pub.dev/money_formatter-0.0.6",
       "packageUri": "lib/",

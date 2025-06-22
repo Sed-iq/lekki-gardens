@@ -88,6 +88,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   # uicons
   uicons_brands: ^1.0.0
+  mockito: ^5.4.5
 
 
 dev_dependencies:

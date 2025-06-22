@@ -28,6 +28,7 @@
         "keyboard_dismisser",
         "lehttp_overrides",
         "logger",
+        "mockito",
         "money_formatter",
         "percent_indicator",
         "pinput",
@@ -161,6 +162,22 @@
         "test_api",
         "vector_math",
         "vm_service"
+      ]
+    },
+    {
+      "name": "mockito",
+      "version": "5.4.5",
+      "dependencies": [
+        "analyzer",
+        "build",
+        "code_builder",
+        "collection",
+        "dart_style",
+        "matcher",
+        "meta",
+        "path",
+        "source_gen",
+        "test_api"
       ]
     },
     {
