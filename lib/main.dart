@@ -114,7 +114,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         brightness: Brightness.light,
         primaryColor: ColorUtils.PrimaryColor,
         scaffoldBackgroundColor: Color(0xFFF0F0F0),
-        fontFamily: "Euclid Circular",
+        fontFamily: "Outfit",
         fontFamilyFallback: ["Sans-Serif"],
         cardTheme: CardThemeData(elevation: 3, color: Color(0xFFFFFFFF), surfaceTintColor: Color(0xFFFFFFFF), shadowColor: Color(0x4F000000)),
         inputDecorationTheme: InputDecorationTheme(
@@ -138,7 +138,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         brightness: Brightness.dark,
         primaryColor: ColorUtils.PrimaryColor,
         scaffoldBackgroundColor: Color(0xFF010E0E),
-        fontFamily: "Euclid Circular",
+        fontFamily: "Outfit",
         fontFamilyFallback: ["Sans-Serif"],
         cardTheme: CardThemeData(elevation: 3, color: Color(0xFF282828), surfaceTintColor: Color(0xFF282828), shadowColor: Color(0x4F000000)),
         inputDecorationTheme: InputDecorationTheme(

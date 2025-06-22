@@ -10,8 +10,9 @@ class CommonUtils {
 
   static void getSystemUIOverlayStyle(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light, //status bar brigtness
-      statusBarIconBrightness: Brightness.light, //status barIcon Brightness
+      statusBarBrightness: Brightness.dark, //status bar brigtness
+      statusBarIconBrightness: Brightness.dark, //status barIcon Brightness
+      statusBarColor: Colors.transparent,
       systemNavigationBarColor: ColorUtils().BackgroundColor,  //navigation background color
       systemNavigationBarDividerColor: Colors.transparent, //Navigation bar divider color
       systemNavigationBarIconBrightness: (!Get.isDarkMode) ? Brightness.dark : Brightness.light, //navigation bar icon

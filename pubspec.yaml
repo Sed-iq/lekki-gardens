@@ -83,6 +83,11 @@ dependencies:
   pinput: ^5.0.0
   # currency formatter
   money_formatter: ^0.0.6
+  flutter_animate: ^4.5.2
+  #smooth page indicator
+  smooth_page_indicator: ^1.2.1
+  # uicons
+  uicons_brands: ^1.0.0
 
 
 dev_dependencies:
@@ -123,13 +128,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Euclid Circular
+    - family: OutFit
       fonts:
-        - asset: fonts/Euclid Circular A Bold.ttf
-        - asset: fonts/Euclid Circular A Light.ttf
-        - asset: fonts/Euclid Circular A Medium.ttf
-        - asset: fonts/Euclid Circular A Regular.ttf
-        - asset: fonts/Euclid Circular A SemiBold.ttf
+        - asset: fonts/Outfit-Bold.ttf
+        - asset: fonts/Outfit-Medium.ttf
+        - asset: fonts/Outfit-Regular.ttf
+        - asset: fonts/Outfit-Black.ttf
 
   #   - family: Trajan Pro
   #     fonts:

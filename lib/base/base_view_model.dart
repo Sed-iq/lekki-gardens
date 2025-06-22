@@ -22,6 +22,7 @@ class BaseViewModel<T> extends GetxController {
   DateTime? timerCountDownListener;
   TextEditingController firstnameController = TextEditingController();
   TextEditingController lastnameController = TextEditingController();
+  TextEditingController repeatPasswordController = TextEditingController();
   TextEditingController fullnameController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();

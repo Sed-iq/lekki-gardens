@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ColorUtils {
-  static const PrimaryColor = Color(0xFF0784CA);
-  static const PrimaryLightColor = Color(0x80A99EC3);
+  static const PrimaryColor = Color(0xFF0B5240);
+  static const PrimaryLightColor = Color(0x8045AA91);
   static const LoadingOverlayColor = Color(0xFFEAEAEA);
   Color AppBarBackgroundColor = (!Get.isDarkMode) ? Color(0xFFFFFFFF) : Color(0xFF010E0E);
-  Color BackgroundColor = (!Get.isDarkMode) ? Color(0xFFF0F0F0) : Color(0xFF323232);
+  Color BackgroundColor = (!Get.isDarkMode) ? Color(0xFFFBFBFB) : Color(0xFF323232);
   Color BackgroundOverlayColor = (!Get.isDarkMode) ? Color(0xFFFFFFFF) : Color(0xFF000000);
   Color CardBackgroundColor = (!Get.isDarkMode) ? Color(0xFFFCFCFC) : Color(0xFF1E1E1E);
   Color CardBorderColor = (!Get.isDarkMode) ? Color(0x9EEDEDED) : Color(0xFF1E1E1E);
@@ -34,4 +34,7 @@ class ColorUtils {
   static const FlushbarErrorColor = Color(0xffc72c41);
   static const FlushbarWarningColor = Color(0xFFF0541E);
   static const FlushbarTextColor = Color(0xFFffffff);
+
+  // Plush Colors
+  static const SecondaryColor = Color(0xFF16977E);
 }

@@ -1,3 +1,7 @@
+import 'package:LekkiGardens/common/adapter/tab_adapter.dart';
+import 'package:LekkiGardens/common/model/bottom_sheet_picker_model.dart';
+import 'package:LekkiGardens/common/view/bottom_sheet_view_utils.dart';
+import 'package:LekkiGardens/common/view/common_view_utils.dart';
 import 'package:LekkiGardens/common/view/common_view_utils.dart';
 import 'package:LekkiGardens/utils/common_utils.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +34,18 @@ class CommonWidgetUtils<T extends BaseViewModel> {
             style: TextStyle(fontSize: 16.sp, color: ColorUtils().ActiveColor, fontWeight: FontWeightUtils.LightRegular),
             decoration: InputDecoration(
               hintText: hint,
+              hintStyle: TextStyle(color: ColorUtils.PrimaryLightColor),
+              prefixIcon: Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: Icon(Icons.email_rounded, color: ColorUtils.SecondaryColor, size: 25.dm),
+              ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.never,
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
               fillColor: ColorUtils().TextFieldBackgroundColor,
@@ -68,13 +77,18 @@ class CommonWidgetUtils<T extends BaseViewModel> {
             decoration: InputDecoration(
               suffixIconConstraints: BoxConstraints(minWidth: 23, maxHeight: 20),
               hintText: hint,
+              hintStyle: TextStyle(color: ColorUtils.PrimaryLightColor),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
+              ),
+              prefixIcon: Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: Icon(Iconsax.lock_circle_bold, color: ColorUtils.SecondaryColor, size: 25.dm),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.never,
               fillColor: ColorUtils().TextFieldBackgroundColor,
@@ -84,7 +98,7 @@ class CommonWidgetUtils<T extends BaseViewModel> {
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: Icon((viewModel.passwordHiddenToggle.value) ? Iconsax.eye_outline : Iconsax.eye_slash_outline, size: 30.dm, color: ColorUtils().ActiveColor),
+                  child: Icon((viewModel.passwordHiddenToggle.value) ? Iconsax.eye_outline : Iconsax.eye_slash_outline, size: 30.dm, color: ColorUtils.SecondaryColor),
                 ),
               ),
             ),
@@ -104,7 +118,7 @@ class CommonWidgetUtils<T extends BaseViewModel> {
   Widget buildOTPTextField({
     int? fieldNumber,
     bool? obscure,
-    required String title,
+    String? title,
     required TextEditingController controller,
     MainAxisAlignment? mainAxisAlignment,
     required T viewModel,
@@ -118,45 +132,41 @@ class CommonWidgetUtils<T extends BaseViewModel> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6.r),
         color: bgColor,
-        border: Border.all(color: borderColor ?? ColorUtils.GrayDarkColor),
+        
       ),
     );
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 13.w),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r), color: ColorUtils().BackgroundOverlayColor),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          CommonViewUtils.buildTextFieldTitle(title, null),
-          SizedBox(height: 5.h),
-          Pinput(
-            forceErrorState: (viewModel.genericTextFieldValidation.isNotEmpty),
-            crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
-            controller: controller,
-            obscureText: obscure ?? true,
-            obscuringWidget: Text(
-              "*",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 19.sp, color: ColorUtils.BlackColor, fontWeight: FontWeightUtils.LightBold),
-            ),
-            mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
-            preFilledWidget: Text(
-              "-",
-              style: TextStyle(fontSize: 173.sp, color: ColorUtils().InActiveColor),
-            ),
-            length: fieldNumber ?? 4,
-            defaultPinTheme: theme,
-            onChanged: (_) => viewModel.resetNotifyListeners(),
-            focusedPinTheme: theme.copyWith(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.r),
-                border: Border.all(color: ColorUtils.PrimaryColor),
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        (title != null) ? CommonViewUtils.buildTextFieldTitle(title, null) : SizedBox.shrink(),
+        SizedBox(height: 5.h),
+        Pinput(
+          forceErrorState: (viewModel.genericTextFieldValidation.isNotEmpty),
+          crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
+          controller: controller,
+          obscureText: obscure ?? true,
+          obscuringWidget: Text(
+            "*",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 19.sp, color: ColorUtils.BlackColor, fontWeight: FontWeightUtils.LightBold),
+          ),
+          mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
+          preFilledWidget: Text(
+            "-",
+            style: TextStyle(fontSize: 173.sp, color: ColorUtils().InActiveColor),
+          ),
+          length: fieldNumber ?? 4,
+          defaultPinTheme: theme,
+          onChanged: (_) => viewModel.resetNotifyListeners(),
+          focusedPinTheme: theme.copyWith(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6.r),
+              border: Border.all(color: ColorUtils.PrimaryColor),
             ),
           ),
-          CommonViewUtils.getTextFieldErrorHint(viewModel.genericTextFieldValidation),
-        ],
-      ),
+        ),
+        CommonViewUtils.getTextFieldErrorHint(viewModel.genericTextFieldValidation),
+      ],
     );
   }
 
@@ -289,13 +299,18 @@ class CommonWidgetUtils<T extends BaseViewModel> {
             decoration: InputDecoration(
               hintText: firstHint,
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.never,
+              prefixIcon: Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: Icon(Icons.person_2_rounded, color: ColorUtils.SecondaryColor, size: 25.dm),
+              ),
               fillColor: ColorUtils().TextFieldBackgroundColor,
+              hintStyle: TextStyle(color: ColorUtils.PrimaryLightColor),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
             ),
@@ -316,13 +331,19 @@ class CommonWidgetUtils<T extends BaseViewModel> {
             decoration: InputDecoration(
               hintText: lastHint,
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.never,
+              prefixIcon: Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: Icon(Icons.person_2_rounded, color: ColorUtils.SecondaryColor, size: 25.dm),
+              ),
+
+              hintStyle: TextStyle(color: ColorUtils.PrimaryLightColor),
               fillColor: ColorUtils().TextFieldBackgroundColor,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
             ),
@@ -348,7 +369,8 @@ class CommonWidgetUtils<T extends BaseViewModel> {
     TextEditingController genericController,
     bool enabled,
     TextInputType textInputType,
-    List<TextInputFormatter>? inputFormatters, {
+    List<TextInputFormatter>? inputFormatters,
+    IconData? prefixIcon, {
     Function(String value)? onChange,
   }) {
     return Obx(
@@ -363,14 +385,19 @@ class CommonWidgetUtils<T extends BaseViewModel> {
             style: TextStyle(fontSize: 16.sp, color: ColorUtils().ActiveColor, fontWeight: FontWeightUtils.LightRegular),
             decoration: InputDecoration(
               hintText: hint,
+              hintStyle: TextStyle(color: ColorUtils.PrimaryLightColor),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
+              prefixIcon: (prefixIcon != null) ? Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: Icon(prefixIcon, color: ColorUtils.SecondaryColor, size: 25.dm),
+              ) : SizedBox.shrink(),
               floatingLabelBehavior: FloatingLabelBehavior.never,
               fillColor: ColorUtils().TextFieldBackgroundColor,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(7.r),
+                borderRadius: BorderRadius.circular(99.r),
                 borderSide: BorderSide(color: ColorUtils().TextFieldBorderColor),
               ),
             ),
@@ -495,8 +522,15 @@ class CommonWidgetUtils<T extends BaseViewModel> {
     );
   }
 
-  static Widget buildCustomSwitch(BuildContext context, bool toggle, Function(bool value) onToggle) =>
-      FlutterSwitch(value: toggle, onToggle: (value) => onToggle(value), activeColor: ColorUtils.PrimaryColor, inactiveColor: ColorUtils().InActiveColor, padding: 0, height: 25.h, width: 45.w);
+  static Widget buildCustomSwitch(BuildContext context, bool toggle, Function(bool value) onToggle) => FlutterSwitch(
+    value: toggle,
+    onToggle: (value) => onToggle(value),
+    activeColor: ColorUtils.PrimaryColor,
+    inactiveColor: ColorUtils().InActiveColor,
+    padding: 0,
+    height: 25.h,
+    width: 45.w,
+  );
 
   Widget buildCustomTab(BuildContext context, T viewModel, TabController? tabController, List<TabModel> tabDataList, List<Widget> tabViewDataList) {
     return (tabController != null)
@@ -582,7 +616,7 @@ class CommonWidgetUtils<T extends BaseViewModel> {
                       length: tabDataList.length,
                       selectedTabIndex: viewModel.customTabIndexListener.value,
                       tabModel: tabDataList.elementAt(index),
-                      onItemClickListener:  (tabModel) {
+                      onItemClickListener: (tabModel) {
                         viewModel.setCustomTabIndex(index);
                         if (callback != null) {
                           callback(tabModel);

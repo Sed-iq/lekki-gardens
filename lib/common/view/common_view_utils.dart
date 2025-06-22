@@ -17,8 +17,8 @@ class CommonViewUtils {
         Get.back();
       },
       child: buildCustomCard(
-        padding: EdgeInsets.all(8.dm),
-        radius: 10.r,
+        padding: EdgeInsets.all(10.dm),
+        radius: 100.r,
         color: ColorUtils().BackgroundOverlayColor,
         child: Icon(Icons.arrow_back, size: 20.dm),
       ),
@@ -76,7 +76,7 @@ class CommonViewUtils {
           buildCustomCard(
             padding: EdgeInsets.all(8.dm),
             radius: 10.r,
-            color: ColorUtils().BackgroundOverlayColor,
+            // color: ColorUtils().BackgroundOverlayColor,
             child: Icon(Icons.arrow_back, size: 20.dm),
           ),
           SizedBox(width: 10.w),
@@ -240,12 +240,16 @@ class CommonViewUtils {
   }
 
   static Widget buildPrimaryButton(BuildContext context, String title, Function() onClick) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
-      decoration: BoxDecoration(color: ColorUtils.PrimaryColor, borderRadius: BorderRadius.circular(12.r)),
-      child: Text(
-        title,
-        style: TextStyle(fontSize: 16.sp, color: ColorUtils.WhiteColor, fontWeight: FontWeightUtils.LightBold),
+    return InkWell(
+      onTap: ()=> onClick(),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 20.w),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(color: ColorUtils.PrimaryColor, borderRadius: BorderRadius.circular(99.r)),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 18.sp, color: ColorUtils.WhiteColor, fontWeight: FontWeightUtils.LightBold),
+        ),
       ),
     );
   }

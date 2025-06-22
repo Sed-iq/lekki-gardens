@@ -1,6 +1,5 @@
 import 'package:LekkiGardens/base/base_view.dart';
 import 'package:LekkiGardens/common/view/common_view_utils.dart';
-import 'package:LekkiGardens/features/auth/signin/sign_in_view_model.dart';
 import 'package:LekkiGardens/features/auth/signup/sign_up_view_model.dart';
 import 'package:LekkiGardens/utils/color_utils.dart';
 import 'package:LekkiGardens/utils/common_widget_utils.dart';
@@ -14,23 +13,23 @@ import 'package:get/instance_manager.dart';
 import 'package:get/utils.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({super.key});
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BaseView(
-      onInit: (SignInViewModel viewModel) {},
-      onResumed: (SignInViewModel viewModel) {},
-      onPaused: (SignInViewModel viewModel) {},
-      onInternetConnected: (SignInViewModel viewModel) {},
-      onInternetDisconnected: (SignInViewModel viewModel) {},
-      onDispose: (SignInViewModel viewModel) {},
+      onInit: (SignUpViewModel viewModel) {},
+      onResumed: (SignUpViewModel viewModel) {},
+      onPaused: (SignUpViewModel viewModel) {},
+      onInternetConnected: (SignUpViewModel viewModel) {},
+      onInternetDisconnected: (SignUpViewModel viewModel) {},
+      onDispose: (SignUpViewModel viewModel) {},
       view: _buildView,
     );
   }
 
-  Widget _buildView(BuildContext context, SignInViewModel viewModel) {
+  Widget _buildView(BuildContext context, SignUpViewModel viewModel) {
     return Scaffold(
       body: SafeArea(
         child: CommonViewUtils.buildDisallowIndicator(
@@ -42,49 +41,67 @@ class SignIn extends StatelessWidget {
                 CommonViewUtils.buildBackButton(),
                 SizedBox(height: 15.h),
                 Text(
-                  "Welcome Back!",
+                  "Create Account",
                   style: TextStyle(fontSize: 33.sp, color: ColorUtils.SecondaryColor, fontWeight: FontWeightUtils.Bold),
                 ),
                 Text(
-                  'Login to access your personalized real estate experience',
+                  'Enter your information and let’s get started',
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16.sp),
                 ),
                 SizedBox(height: 25.h),
-                CommonWidgetUtils<SignInViewModel>().buildGenericTextField(context, viewModel, null, null, "Username", viewModel.usernameController, true, TextInputType.text, null, Icons.person_2_rounded),
+                CommonWidgetUtils<SignUpViewModel>().buildFullNameTextField(context, viewModel, null, null, null, null, "First Name", 'Last Name'),
                 SizedBox(height: 25.h),
-                CommonWidgetUtils<SignInViewModel>().buildPasswordTextField(context, viewModel, null, null, "Password", viewModel.passwordController, true),
+                CommonWidgetUtils<SignUpViewModel>().buildEmailTextField(context, viewModel, null, null, "Email Address", viewModel.emailController, true),
                 SizedBox(height: 25.h),
+                CommonWidgetUtils<SignUpViewModel>().buildPasswordTextField(context, viewModel, null, null, "Password", viewModel.passwordController, true),
+                SizedBox(height: 25.h),
+                CommonWidgetUtils<SignUpViewModel>().buildPasswordTextField(
+                  context,
+                  Get.put(SignUpViewModel(), tag: 'repeat-password'),
+                  null,
+                  null,
+                  "Confirm Password",
+                  viewModel.repeatPasswordController,
+                  true,
+                ),
+                SizedBox(height: 10.h),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                          child: Checkbox.adaptive(
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            value: viewModel.rememberListener.value,
-                            side: BorderSide(color: ColorUtils.GrayDarkColor),
-                            activeColor: ColorUtils.PrimaryColor,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(9.r)),
-                            onChanged: (value) {
-                              viewModel.rememberListener.value = value ?? false;
-                            },
-                          ),
-                        ),
-                        SizedBox(width: 3.w),
-                        Text('Remember me', style: TextStyle())
-                      ],
+                    Checkbox(
+                      value: viewModel.termsAgreementListener.value,
+                      side: BorderSide(color: ColorUtils.GrayDarkColor),
+                      activeColor: ColorUtils.PrimaryColor,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(9.r)),
+                      onChanged: (value) {
+                        viewModel.termsAgreementListener.value = value ?? false;
+                      },
                     ),
-                   InkWell(
-                    onTap: () => Get.toNamed(RouteConstants.ACCOUNT_RECOVERY),
-                    child: Text("Forgot password", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeightUtils.Regular, color: ColorUtils.PrimaryColor)))
+                    SizedBox(width: 5.w),
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'By creating an account, you agree to the ',
+                          children: [
+                            TextSpan(
+                              text: 'Terms',
+                              style: TextStyle(color: ColorUtils.SecondaryColor),
+                            ),
+                            TextSpan(text: ' and '),
+                            TextSpan(
+                              text: 'Poilices',
+                              style: TextStyle(color: ColorUtils.SecondaryColor),
+                            ),
+                          ],
+                          style: TextStyle(fontSize: 14.sp, fontFamily: "Outfit", color: ColorUtils().ActiveColor),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 25.h),
-                CommonViewUtils.buildPrimaryButton(context, 'Login', () => null),
+                CommonViewUtils.buildPrimaryButton(context, 'Sign up', () => null),
                 SizedBox(height: 15.h),
                 _buildAlternativeSignUp(context, viewModel),
                 SizedBox(height: 15.h),
@@ -92,11 +109,11 @@ class SignIn extends StatelessWidget {
                   alignment: Alignment.center,
                   child: RichText(
                     text: TextSpan(
-                      text: "Don't have an account? ",
+                      text: 'Already have an account? ',
                       children: [
                         TextSpan(
-                          text: "Sign Up",
-                          recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(RouteConstants.SIGNUP),
+                          text: "Sign in",
+                          recognizer: TapGestureRecognizer()..onTap = () => Get.toNamed(RouteConstants.SIGNIN),
                           style: TextStyle(color: ColorUtils.SecondaryColor, decoration: TextDecoration.underline),
                         ),
                       ],
@@ -113,7 +130,7 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  Widget _buildAlternativeSignUp(BuildContext context, SignInViewModel viewModel) {
+  Widget _buildAlternativeSignUp(BuildContext context, SignUpViewModel viewModel) {
     return Column(
       children: [
         Row(
@@ -122,7 +139,7 @@ class SignIn extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(
-                'Or continue with',
+                'Or sign up with',
                 style: TextStyle(color: Colors.grey[600], fontSize: 14.sp, fontWeight: FontWeight.w400),
               ),
             ),
