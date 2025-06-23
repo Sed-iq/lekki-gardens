@@ -7,7 +7,7 @@ class SignInViewModel extends BaseViewModel {
   RxBool rememberListener = false.obs;
 
   String getInitialRoute() {
-    bool hasUserLogin = getDataManager().getSaveLoginState();
+    // bool hasUserLogin = getDataManager().getSaveLoginState();
     return RouteConstants.ONBOARDING;
   }
 

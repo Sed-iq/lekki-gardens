@@ -10,13 +10,13 @@ class OnboardingViewModel extends BaseViewModel {
   RxInt currentOnboardingListener = 0.obs;
   PageController pageController = PageController();
 
-  late PageController backgroundController;
+  PageController backgroundController = PageController();
   bool isBackgroundScrolling = false;
   bool isContentScrolling = false;
 
-  void initializeControllers() {
-    backgroundController = PageController();
-  }
+  // void initializeControllers() {
+  //   backgroundController = PageController();
+  // }
 
   void disposeControllers() {
     backgroundController.dispose();

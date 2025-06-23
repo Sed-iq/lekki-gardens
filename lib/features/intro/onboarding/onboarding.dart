@@ -14,7 +14,7 @@ class Onboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView(
       onInit: (OnboardingViewModel viewModel) {
-        viewModel.initializeControllers();
+        // viewModel.initializeControllers();
       },
       onResumed: (OnboardingViewModel viewModel) {},
       onPaused: (OnboardingViewModel viewModel) {},
@@ -121,24 +121,26 @@ class Onboarding extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 15.h),
-                 (viewModel.currentOnboardingListener.value != DataUtils.onBoardingList.length - 1) ? GestureDetector(
-                    onTap: () => viewModel.skipOnboarding(),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Skip",
-                            style: TextStyle(fontWeight: FontWeightUtils.Regular, color: ColorUtils.PrimaryColor, fontSize: 17.sp),
+                  (viewModel.currentOnboardingListener.value != DataUtils.onBoardingList.length - 1)
+                      ? GestureDetector(
+                          onTap: () => viewModel.skipOnboarding(),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Skip",
+                                  style: TextStyle(fontWeight: FontWeightUtils.Regular, color: ColorUtils.PrimaryColor, fontSize: 17.sp),
+                                ),
+                                SizedBox(width: 8.w),
+                                Icon(Icons.arrow_forward_rounded, color: ColorUtils.PrimaryColor, size: 19),
+                              ],
+                            ),
                           ),
-                          SizedBox(width: 8.w),
-                          Icon(Icons.arrow_forward_rounded, color: ColorUtils.PrimaryColor, size: 19),
-                        ],
-                      ),
-                    ),
-                  ) : SizedBox.shrink(),
+                        )
+                      : SizedBox.shrink(),
                 ],
               ),
             ),
