@@ -11,7 +11,7 @@ void main() {
     setUp(() {
       Get.testMode = true;
       viewModel = OnboardingViewModel();
-      viewModel.initializeControllers();
+      // viewModel.initializeControllers();
     });
 
     tearDown(() {

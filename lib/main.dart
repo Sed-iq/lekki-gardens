@@ -26,7 +26,6 @@ import 'data/database/database_helper.dart';
 import 'data/sharedPreference/app_shared_preference_helper.dart';
 import 'data/sharedPreference/shared_preference_helper.dart';
 import 'features/auth/signin/sign_in_view_model.dart';
-import 'features/intro/onboarding/onboarding.dart';
 import 'view_model_provider_factory.dart';
 
 Future<void> main() async {
@@ -164,7 +163,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           gestures: [GestureType.onTap, GestureType.onPanUpdateDownDirection, GestureType.onPanUpdateUpDirection],
           child: GetMaterialApp(
               navigatorKey: Get.key,
-              title: "Facilitated Empire",
+              title: "Lekki Gardens",
               debugShowCheckedModeBanner: false,
               themeMode: (!isDarkMode) ? ThemeMode.light : ThemeMode.dark,
               theme: lightThemeData,
