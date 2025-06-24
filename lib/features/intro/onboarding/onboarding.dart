@@ -29,123 +29,126 @@ class Onboarding extends StatelessWidget {
 
   Widget _buildView(BuildContext context, OnboardingViewModel viewModel) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: PageView.builder(
-              controller: viewModel.backgroundController,
-              itemCount: DataUtils.onBoardingList.length,
-              onPageChanged: (value) => viewModel.onBackgroundPageChanged(value),
-              itemBuilder: (context, index) => Image.asset(DataUtils.onBoardingList.elementAt(index).image, fit: BoxFit.cover),
-            ),
-            bottom: 150,
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
-              height: 400,
-              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 50.w),
-              decoration: BoxDecoration(
-                image: DecorationImage(fit: BoxFit.fill, alignment: Alignment.center, image: AssetImage("assets/rect.png")),
+      body: SafeArea(
+        top: false,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: PageView.builder(
+                controller: viewModel.backgroundController,
+                itemCount: DataUtils.onBoardingList.length,
+                onPageChanged: (value) => viewModel.onBackgroundPageChanged(value),
+                itemBuilder: (context, index) => Image.asset(DataUtils.onBoardingList.elementAt(index).image, fit: BoxFit.cover),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: 72.h),
-                  Center(
-                    child: SmoothPageIndicator(
-                      effect: ExpandingDotsEffect(dotHeight: 10, activeDotColor: ColorUtils.SecondaryColor, dotColor: ColorUtils.PrimaryLightColor, dotWidth: 10),
-                      controller: viewModel.pageController,
-                      count: DataUtils.onBoardingList.length,
-                    ),
-                  ),
-                  Flexible(
-                    child: PageView.builder(
-                      controller: viewModel.pageController,
-                      onPageChanged: (value) => viewModel.onContentPageChanged(value),
-                      itemCount: DataUtils.onBoardingList.length,
-                      itemBuilder: (context, index) => Column(
-                        children: [
-                          SizedBox(height: 30.h),
-                          Text(
-                            DataUtils.onBoardingList.elementAt(index).title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: ColorUtils.SecondaryColor, fontSize: 30.sp, fontWeight: FontWeightUtils.LightBold),
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            DataUtils.onBoardingList.elementAt(index).description,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 17.sp, color: ColorUtils().InActiveColor),
-                          ),
-                        ],
+              bottom: 150,
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                height: 400,
+                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 50.w),
+                decoration: BoxDecoration(
+                  image: DecorationImage(fit: BoxFit.fill, alignment: Alignment.center, image: AssetImage("assets/rect.png")),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: 72.h),
+                    Center(
+                      child: SmoothPageIndicator(
+                        effect: ExpandingDotsEffect(dotHeight: 10, activeDotColor: ColorUtils.SecondaryColor, dotColor: ColorUtils.PrimaryLightColor, dotWidth: 10),
+                        controller: viewModel.pageController,
+                        count: DataUtils.onBoardingList.length,
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      (viewModel.currentOnboardingListener.value > 0)
-                          ? CommonViewUtils.buildCustomOutlineButton(
-                              context: context,
-                              outlineColor: ColorUtils.GraySlightColor,
-                              radius: 100.r,
-                              onClick: () => viewModel.previousPage(),
-                              child: Icon(Icons.arrow_back, size: 20.dm, color: ColorUtils().InActiveColor),
-                            )
-                          : SizedBox.shrink(),
-                      (viewModel.currentOnboardingListener.value > 0) ? SizedBox(width: 20.w) : SizedBox.shrink(),
-                      Expanded(
-                        child: CommonViewUtils.buildPrimaryButton(
-                          context,
-                          (viewModel.currentOnboardingListener.value == DataUtils.onBoardingList.length - 1) ? "Let's Get Started" : 'Next',
-                          () => viewModel.nextPage(),
+                    Flexible(
+                      child: PageView.builder(
+                        controller: viewModel.pageController,
+                        onPageChanged: (value) => viewModel.onContentPageChanged(value),
+                        itemCount: DataUtils.onBoardingList.length,
+                        itemBuilder: (context, index) => Column(
+                          children: [
+                            SizedBox(height: 30.h),
+                            Text(
+                              DataUtils.onBoardingList.elementAt(index).title,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: ColorUtils.SecondaryColor, fontSize: 30.sp, fontWeight: FontWeightUtils.LightBold),
+                            ),
+                            SizedBox(height: 8.h),
+                            Text(
+                              DataUtils.onBoardingList.elementAt(index).description,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 17.sp, color: ColorUtils().InActiveColor),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Already have an account? ',
+                    ),
+                    Row(
                       children: [
-                        TextSpan(
-                          text: "Sign in",
-                          recognizer: TapGestureRecognizer()..onTap = () => viewModel.navigateToSignIN(),
-                          style: TextStyle(color: ColorUtils.SecondaryColor),
+                        (viewModel.currentOnboardingListener.value > 0)
+                            ? CommonViewUtils.buildCustomOutlineButton(
+                                context: context,
+                                outlineColor: ColorUtils.GraySlightColor,
+                                radius: 100.r,
+                                onClick: () => viewModel.previousPage(),
+                                child: Icon(Icons.arrow_back, size: 20.dm, color: ColorUtils().InActiveColor),
+                              )
+                            : SizedBox.shrink(),
+                        (viewModel.currentOnboardingListener.value > 0) ? SizedBox(width: 20.w) : SizedBox.shrink(),
+                        Expanded(
+                          child: CommonViewUtils.buildPrimaryButton(
+                            context,
+                            (viewModel.currentOnboardingListener.value == DataUtils.onBoardingList.length - 1) ? "Let's Get Started" : 'Next',
+                            () => viewModel.nextPage(),
+                          ),
                         ),
                       ],
-                      style: TextStyle(color: ColorUtils().InActiveColor, fontFamily: "Outfit", fontSize: 13.sp),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 15.h),
-                  (viewModel.currentOnboardingListener.value != DataUtils.onBoardingList.length - 1)
-                      ? GestureDetector(
-                          onTap: () => viewModel.skipOnboarding(),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Skip",
-                                  style: TextStyle(fontWeight: FontWeightUtils.Regular, color: ColorUtils.PrimaryColor, fontSize: 17.sp),
-                                ),
-                                SizedBox(width: 8.w),
-                                Icon(Icons.arrow_forward_rounded, color: ColorUtils.PrimaryColor, size: 19),
-                              ],
-                            ),
+                    SizedBox(height: 10.h),
+                    RichText(
+                      text: TextSpan(
+                        text: 'Already have an account? ',
+                        children: [
+                          TextSpan(
+                            text: "Sign in",
+                            recognizer: TapGestureRecognizer()..onTap = () => viewModel.navigateToSignIN(),
+                            style: TextStyle(color: ColorUtils.SecondaryColor),
                           ),
-                        )
-                      : SizedBox.shrink(),
-                ],
+                        ],
+                        style: TextStyle(color: ColorUtils().InActiveColor, fontFamily: "Outfit", fontSize: 13.sp),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 15.h),
+                    (viewModel.currentOnboardingListener.value != DataUtils.onBoardingList.length - 1)
+                        ? GestureDetector(
+                            onTap: () => viewModel.skipOnboarding(),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Skip",
+                                    style: TextStyle(fontWeight: FontWeightUtils.Regular, color: ColorUtils.PrimaryColor, fontSize: 17.sp),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Icon(Icons.arrow_forward_rounded, color: ColorUtils.PrimaryColor, size: 19),
+                                ],
+                              ),
+                            ),
+                          )
+                        : SizedBox.shrink(),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
